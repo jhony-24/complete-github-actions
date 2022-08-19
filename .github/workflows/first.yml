@@ -1,0 +1,23 @@
+name: first
+on:
+ push:
+  branches:
+   - main
+
+jobs:
+ job1:
+  name: job1
+  runs-on: ubuntu-latest
+  steps:
+   - name: step 1
+     uses: actions/actions@v2
+   - name: step 2
+     run: env | sort
+ job2:
+  name: job2 
+  runs-on: windows-latest
+  steps:
+   - name: step 1
+     uses: actions/actions@v2
+   - name: step 2
+     run: "Get-ChildItem Env: | Sort-Object Name"
