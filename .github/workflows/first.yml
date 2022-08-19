@@ -30,6 +30,8 @@ jobs:
      run: echo "hello world"
  job4:
   name: job4
+  env:
+   GLOBAL_ENVIRONMENT: "global"
   runs-on: ubuntu-latest
   steps:
    - name: print environments
@@ -43,4 +45,5 @@ jobs:
       echo "second version"
       echo $STEP_ENVIRONMENT 
       echo $VERSION 
+      echo " print global $GLOBAL_ENVIRONMENT"
       
