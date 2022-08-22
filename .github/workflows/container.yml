@@ -14,4 +14,4 @@ jobs:
     steps: 
       - name: analize events
         uses: actions/checkout@v3
-      - run: echo ${{github.event.head_commit.message.includes('fix')}}
+      - run: echo ${{contains(github.event.head_commit.message,'feat')}}
