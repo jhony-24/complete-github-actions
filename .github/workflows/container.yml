@@ -16,9 +16,8 @@ jobs:
       run:
         working-directory: packages/builder
     steps:
-      - name: install dependencies
-        uses: actions/checkout@v2
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
       - name: create .npmrc
         run: npm start
       - name: upload artifact
