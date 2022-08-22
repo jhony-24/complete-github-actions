@@ -4,14 +4,32 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "./packages/**"
 
 env:
  PACKAGE_ACTION_AUTH : "deploy(auth)"
  PACKAGE_ACTION_OPERATIONS : "deploy(operations)"
 
 jobs:
+  build-npmrc:
+    runs-on: ubuntu-latest
+    defaults: 
+      run:
+        working-directory: packages/builder
+    steps:
+      - name: install dependencies
+        uses: actions/setup-node@v3
+        run: npm start
+      - name: upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: npmrc
+          path: ../../.npmrc
+
   deploy-auth:
     if: ${{contains(github.event.head_commit.message,'deploy(auth)')}} 
+    needs: [ build-npmrc ]
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -21,9 +39,15 @@ jobs:
         uses: actions/checkout@v3
       - run: echo $PACKAGE_ACTION_AUTH
       - run: ls
+      - name: download .npmrc artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: npmrc
+        run: less ../../.npmrc
   
   deploy-operations:
     if: ${{contains(github.event.head_commit.message,'deploy(operations)')}} 
+    needs: [ build-npmrc ]
     runs-on: ubuntu-latest
     defaults:
       run:
