@@ -1,0 +1,52 @@
+name: first
+on:
+ push:
+  branches:
+   - main
+
+env:
+ GLOBAL_ENVIRONMENT: global
+
+jobs:
+ job1:
+  name: job1
+  runs-on: ubuntu-latest
+  steps:
+   - name: step 1
+     uses: actions/checkout@v2
+   - name: step 2
+     run: env | sort
+ job2:
+  name: job2 
+  runs-on: windows-latest
+  steps:
+   - name: step 1
+     uses: actions/checkout@v2
+   - name: step 2
+     run: "Get-ChildItem Env: | Sort-Object Name"
+ job3:
+  name: job3
+  runs-on: windows-latest
+  needs: [ job1, job2 ]
+  steps:
+   - name: step 1
+     run: echo "hello world"
+ job4:
+  name: job4
+  env:
+   GLOBAL_ENVIRONMENT_JOB: "global in job 4"
+  runs-on: ubuntu-latest
+  steps:
+   - name: print environments
+     env:
+      STEP_ENVIRONMENT: 2
+      VERSION: "1.0.1-beta"
+     run: |
+      echo "first version"
+      echo "step: ${{env.STEP_ENVIRONMENT}}" 
+      echo "version: ${{env.VERSION}}" 
+      echo "second version"
+      echo $STEP_ENVIRONMENT 
+      echo $VERSION 
+      echo " print global $GLOBAL_ENVIRONMENT_JOB"
+      
