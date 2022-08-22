@@ -1,0 +1,14 @@
+name: container
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  analize:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: analize events
+        uses: actions/checkout@v3
+        run: echo ${{github}}
