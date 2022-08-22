@@ -15,6 +15,7 @@ jobs:
   build-npmrc:
     name: build-npmrc
     runs-on: ubuntu-latest
+    environment: production
     strategy:
       matrix:
         version: [ 12.x, 14.x ]
@@ -36,7 +37,8 @@ jobs:
 
   deploy-auth:
     name: deploy-auth
-    if: ${{contains(github.event.head_commit.message,'deploy(auth)')}} 
+    if: ${{contains(github.event.head_commit.message,'deploy(auth)')}}
+    environment: production 
     needs: [ build-npmrc ]
     runs-on: ubuntu-latest
     defaults:
@@ -56,6 +58,7 @@ jobs:
   deploy-operations:
     name: deploy-operations
     if: ${{contains(github.event.head_commit.message,'deploy(operations)')}} 
+    environment: production
     needs: [ build-npmrc ]
     runs-on: ubuntu-latest
     defaults:
