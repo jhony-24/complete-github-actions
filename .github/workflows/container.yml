@@ -20,7 +20,7 @@ jobs:
       - name: analize events
         uses: actions/checkout@v3
       - run: echo $PACKAGE_ACTION_AUTH
-      - run: list
+      - run: ls
   
   deploy-operations:
     if: ${{contains(github.event.head_commit.message,'deploy(operations)')}} 
@@ -32,4 +32,4 @@ jobs:
       - name: analize events
         uses: actions/checkout@v3
       - run: echo $PACKAGE_ACTION_OPERATIONS
-      - run: list
+      - run: ls
