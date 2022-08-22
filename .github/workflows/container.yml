@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: install dependencies
         uses: actions/setup-node@v3
-        run: npm start
+      - run: npm start
       - name: upload artifact
         uses: actions/upload-artifact@v3
         with:
@@ -43,7 +43,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: npmrc
-        run: less ../../.npmrc
+      - run: less ../../.npmrc
   
   deploy-operations:
     if: ${{contains(github.event.head_commit.message,'deploy(operations)')}} 
