@@ -11,7 +11,7 @@ env:
 
 jobs:
   deploy-auth:
-    if: ${{contains(github.event.head_commit.message,env.PACKAGE_ACTION_AUTH)}} 
+    if: ${{contains(github.event.head_commit.message,'deploy(auth)')}} 
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -23,7 +23,7 @@ jobs:
       - run: list
   
   deploy-operations:
-    if: ${{contains(github.event.head_commit.message,env.PACKAGE_ACTION_OPERATIONS)}} 
+    if: ${{contains(github.event.head_commit.message,'deploy(operations)')}} 
     runs-on: ubuntu-latest
     defaults:
       run:
