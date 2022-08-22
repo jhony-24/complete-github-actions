@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "./packages/**"
 
 env:
  PACKAGE_ACTION_AUTH : "deploy(auth)"
