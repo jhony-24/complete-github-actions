@@ -8,7 +8,10 @@ on:
 jobs:
   analize:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/auth
     steps: 
       - name: analize events
         uses: actions/checkout@v3
-      - run: echo ${{github}}
+      - run: echo ${{github.event.head_commit.message}}
